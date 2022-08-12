@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Data Passing - CRC_2022_SV_React_Internship_Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">CRC_2022_SV_React_Internship_Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Components_Home/" class="nav-link">Components Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Methods_Home/" class="nav-link">Methods Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Routers/" class="nav-link">Routers</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#data-passing" class="nav-link">Data Passing</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#pass-by-propsstate" class="nav-link">Pass By props.state</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#pass-by-context" class="nav-link">Pass By Context</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="data-passing">Data Passing</h1>
+<p>In React, we often encounter the need for components to communicate with each other. 
+The essence of a component is a function. 
+When calling a component, we can pass the required variables to another component like passing parameters. 
+The most natural way to pass parameters is from parent component to child component, 
+but many times what we need is to pass variables between sibling components. 
+The solution to achieve this kind of variable passing is
+to use <code>useState()</code> in the parent component of the sibling component 
+(or create a new one if it doesn't exist) to define a variable and its setter and pass it to the child component. 
+In the child component, you can use setters to change the value of the variable,
+and listen to whether the value of the child component changes to re-render the component.</p>
+<h2 id="pass-by-propsstate">Pass By <code>props.state</code></h2>
+<p>We tried many ways to pass variables between components, 
+but we finally decide using the most basic way, that is using props as the main method. 
+Because using props is simple and robust, and there is no black box.
+Here are some example we use to pass variables by props.</p>
+<h4 id="1-base-case">1. Base case</h4>
+<p>Put the param in Child component's state field,
+the param could be define previously or directly assign a value in state.</p>
+<details><summary>Example</summary>
+
+in Parent.js
+
+
+<pre><code class="language-javascript">export function Parent(props){
+  const [param1, setParam1] = useState(&quot;Base example&quot;)
+  return (
+    &lt;Child state={{param1, setParam1, constParam: &quot;const param&quot;}} &gt;
+      &quot;Children&quot;
+    &lt;/Child&gt;
+  )
+}
+</code></pre>
+
+
+in Child.js
+
+
+<pre><code class="language-javascript">export function Child(props){
+  const{param1, setParam1, constParam} = props.state
+  const children = props.children
+  return `${children} ${param1} ${constParam}`;
+}
+</code></pre>
+
+</details>
+
+<hr />
+<h4 id="2-partially-using-state">2. Partially Using State</h4>
+<p>You are not necessary to get all the params from state, 
+and you can rename it</p>
+<details><summary>Example</summary>
+
+in Parent.js
+
+
+<pre><code class="language-javascript">export function Parent(props){
+  const [param1, setParam1] = useState(&quot;example 2&quot;)
+
+  return (
+    &lt;Child state={{param1, setParam1}} /&gt;
+  )
+}
+</code></pre>
+
+
+in Child.js
+
+
+<pre><code class="language-javascript">export function Child(props){
+  const{param1: myParam} = props.state
+
+  return myParam;
+}
+</code></pre>
+
+</details>
+
+<hr />
+<h4 id="3-package-the-state">3. Package The State</h4>
+<p>You can package all the state and pass it to multiple children,
+And Child can only get the param their need.</p>
+<details><summary>Example</summary>
+
+in Parent.js
+
+
+<pre><code class="language-javascript">export function Parent(props){
+
+  const [param1, setParam1] = useState(&quot;example 3 param1&quot;)
+  const [param2, setParam2] = useState(&quot;example 3 param2&quot;)
+
+  const state={param1, setParam1, param2, setParam2}
+
+  return (
+    &lt;&gt;
+      &lt;Child1 state={state} /&gt;
+      &lt;Child2 state={state} /&gt;
+    &lt;/&gt;
+  )
+}
+</code></pre>
+
+
+in Child1.js
+
+
+<pre><code class="language-javascript">export function Child1(props){
+  const{param1, setParam1} = props.state
+
+  return param1;
+}
+</code></pre>
+
+
+in Child2.js
+
+
+<pre><code class="language-javascript">export function Child2(props){
+  const{param2, setParam2} = props.state
+
+  return param2;
+}
+</code></pre>
+
+
+</details>
+
+<hr />
+<h4 id="4-package-the-state">4. Package The State</h4>
+<p>You can use <code>{...props.state}</code> to pass all inherited state.</p>
+<details><summary>Example</summary>
+
+in GrandParent.js
+
+
+<pre><code class="language-javascript">export function GrandParent(props){
+  const [grandParam, setGrandParam] = useState(&quot;example 4&quot;)
+
+  return (
+    &lt;Parent state={{grandParam, setGrandParam}} /&gt;
+  )
+}
+</code></pre>
+
+
+in Parent.js
+
+
+<pre><code class="language-javascript">export function Parent(props){
+  return (
+    &lt;Child state={{...props.state}} /&gt;
+  )
+}
+</code></pre>
+
+
+in Child.js
+
+
+<pre><code class="language-javascript">export function Child(props){
+  const{grandParam, setGrandParam} = props.state
+
+  return grandParam;
+}
+</code></pre>
+
+
+</details>
+
+<hr />
+<h4 id="5-combination">5. Combination</h4>
+<p>The above methods can be combined with each other.</p>
+<details><summary>Example</summary>
+
+in GrandParent.js
+
+
+<pre><code class="language-javascript">export function GrandParent(props){
+  const [grandParam, setGrandParam] = useState(&quot;example 5&quot;)
+
+  return (
+    &lt;Parent state={{grandParam, setGrandParam}} /&gt;
+  )
+}
+</code></pre>
+
+
+in Parent.js
+
+
+<pre><code class="language-javascript">export function Parent(props){
+  const [parentParam1, setParentParam1] = useState(&quot;parent param 1&quot;)
+  const [parentParam2, setParentParam2] = useState(&quot;parent param 2&quot;)
+
+  const state = {parentParam1, parentParam2}
+  return (
+    &lt;Child state={{...props.state, ...state, constParam: &quot;const param&quot;}} /&gt;
+  )
+}
+</code></pre>
+
+
+in Child.js
+
+
+<pre><code class="language-javascript">export function Child(props){
+  const{grandParam, parentParam1, parentParam2, constParam} = props.state
+
+  return `${grandParam}, ${parentParam1}, ${parentParam2}, ${constParam}`;
+}
+</code></pre>
+
+
+</details>
+
+<hr />
+<h2 id="pass-by-context">Pass By Context</h2>
+<p>When the nesting relationship of components is too complex to use props,
+we will use context to pass parameters. 
+But once the context is used, 
+it means that the components connected by the context will become inseparable, 
+it will reducing the modularity of the code.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

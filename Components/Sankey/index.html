@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Sankey - CRC_2022_SV_React_Internship_Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">CRC_2022_SV_React_Internship_Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Components_Home/" class="nav-link">Components Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Methods_Home/" class="nav-link">Methods Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Routers/" class="nav-link">Routers</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#sankey" class="nav-link">Sankey</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#people-sankey" class="nav-link">People sankey</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#map-sankey" class="nav-link">Map sankey</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="sankey">Sankey</h1>
+<h2 id="people-sankey">People sankey</h2>
+<h3 id="overview">Overview</h3>
+<p>The People-sankey component is used for visualizing transaction information and relationship between enslaved people and enslavers. The visualization includes nodes of enslaved people, transaction and enslavers showing role of enslavers, type of transactions, detail information of voyages.</p>
+<p>The People-sankey component support features including:</p>
+<ul>
+<li>clicked pop-over of Card component on enslaved people nodes</li>
+<li>mouseenter pop-over of age and height information on enslaved people nodes, voyages and transactions information including date, year, place and amount on transaction nodes.</li>
+<li>Voyage-modal component triggered by clickable voyage id button  </li>
+</ul>
+<p>&nbsp;</p>
+<h3 id="external-package-used">External Package Used</h3>
+<h5 id="d3-sankey">d3-sankey</h5>
+<ul>
+<li><a href="https://github.com/d3/d3-sankey">d3-sankey</a></li>
+</ul>
+<p>&nbsp;</p>
+<h3 id="functions">Functions</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Functionality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>renderStory</td>
+<td>render Card component on enslaved people nodes</td>
+</tr>
+<tr>
+<td>sankey</td>
+<td>Draw the sankey graph using nodes list on the canvas</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h3 id="customization">Customization</h3>
+<p>The style of canvas, nodes and links be set in <code>Style.css</code>.</p>
+<p>&nbsp;</p>
+<h3 id="directory">Directory</h3>
+<p>The following directory shows all files related to sankey. </p>
+<pre><code>src
+|
+|___PASTApp
+    |
+    |___Component
+        |
+        |___Sankey.js
+        |___styles.css
+</code></pre>
+<hr />
+<h2 id="map-sankey">Map sankey</h2>
+<h3 id="overview_1">Overview</h3>
+<p>The Map Sankey is used reflect the prople voyage flow between different sites with importing json data. It allows users interact with map by clicking an edge to get specific path on the map. Besides, if users wants to reset the sankey just click the button on the top of the sankey. In the Sankey file, <code>CircularSankey.js</code> is to defined the passing prop and drawing rules (this has been covered in <code>d3-sankey-circular</code>). <code>CircularExample.js</code> is about the fetching data, processing data as expected format (it will list as following quote box)</p>
+<blockquote>
+<p>Fetching data is not following the <code>d3-sankey</code> drawing style, we have to transfer as a ideal format as following</p>
+</blockquote>
+<details>
+<summary>Fetching data & Nodes & Links</summary>
+
+Fetching data
+
+<pre><code>{
+    &quot;Africa&quot;: {
+        &quot;Africa&quot;: 168878,
+        &quot;Brazil&quot;: 3520059,
+        &quot;Caribbean&quot;: 5063754,
+        &quot;Europe&quot;: 9179,
+        &quot;Mainland North America&quot;: 365978,
+        &quot;Other&quot;: 190794,
+        &quot;Spanish Mainland Americas&quot;: 644166
+    },
+    &quot;Brazil&quot;: {
+        &quot;Brazil&quot;: 96539,
+        &quot;Caribbean&quot;: 3970,
+        &quot;Mainland North America&quot;: 83,
+        &quot;Other&quot;: 37,
+        &quot;Spanish Mainland Americas&quot;: 54734
+    },
+    &quot;Caribbean&quot;: {
+        &quot;Africa&quot;: 29,
+        &quot;Caribbean&quot;: 159258,
+        &quot;Mainland North America&quot;: 45570,
+        &quot;Other&quot;: 6679,
+        &quot;Spanish Mainland Americas&quot;: 121479
+    },
+    &quot;Europe&quot;: {
+        &quot;Mainland North America&quot;: 30
+    },
+    &quot;Mainland North America&quot;: {
+        &quot;Africa&quot;: 10,
+        &quot;Brazil&quot;: 2,
+        &quot;Caribbean&quot;: 7900,
+        &quot;Mainland North America&quot;: 67808
+    },
+    &quot;Other&quot;: {
+        &quot;Brazil&quot;: 497,
+        &quot;Caribbean&quot;: 1182,
+        &quot;Mainland North America&quot;: 4615,
+        &quot;Other&quot;: 15,
+        &quot;Spanish Mainland Americas&quot;: 554
+    },
+    &quot;Spanish Mainland Americas&quot;: {
+        &quot;Africa&quot;: 70,
+        &quot;Brazil&quot;: 1299,
+        &quot;Caribbean&quot;: 736,
+        &quot;Mainland North America&quot;: 10,
+        &quot;Spanish Mainland Americas&quot;: 1171
+    }
+}
+</code></pre>
+
+
+Node
+
+
+<pre><code>key: Integer
+value: Object:{name: ___ , index: ___ , sourceLinks: ____ , targetLinks ____, value: ____, x0: ..., x1: ...., y0: ..., y1: ...}
+</code></pre>
+
+
+
+<pre><code>0: {name: 'Africa', index: 0, sourceLinks: Array(7), targetLinks: Array(4), partOfCycle: true, …}
+1: {name: 'Brazil', index: 1, sourceLinks: Array(5), targetLinks: Array(5), partOfCycle: true, …}
+2: {name: 'Caribbean', index: 2, sourceLinks: Array(5), targetLinks: Array(6), partOfCycle: true, …}
+3: {name: 'Europe', index: 3, sourceLinks: Array(1), targetLinks: Array(1), partOfCycle: false, …}
+4: {name: 'Mainland North America', index: 4, sourceLinks: Array(4), targetLinks: Array(7), partOfCycle: true, …}
+5: {name: 'Other', index: 5, sourceLinks: Array(5), targetLinks: Array(4), partOfCycle: true, …}
+6: {name: 'Spanish Mainland Americas', index: 6, sourceLinks: Array(5), targetLinks: Array(5), partOfCycle: true, …}
+</code></pre>
+
+
+Link
+
+<pre><code>key: Integer
+value: Object:{source: {Object}, target: {Object}, value: ..., width: ..., y0:..., y1:...} 
+</code></pre>
+
+
+
+<pre><code>0: {source: {…}, target: {…}, value: 168878, index: 0, circular: true, …}
+1: {source: {…}, target: {…}, value: 3520059, index: 1, circular: false, …}
+2: {source: {…}, target: {…}, value: 5063754, index: 2, circular: false, …}
+3: {source: {…}, target: {…}, value: 9179, index: 3, circular: false, …}
+4: {source: {…}, target: {…}, value: 365978, index: 4, circular: false, …}
+5: {source: {…}, target: {…}, value: 190794, index: 5, circular: false, …}
+6: {source: {…}, target: {…}, value: 644166, index: 6, circular: false, …}
+7: {source: {…}, target: {…}, value: 96539, index: 7, circular: true, …}
+8: {source: {…}, target: {…}, value: 3970, index: 8, circular: false, …}
+9: {source: {…}, target: {…}, value: 83, index: 9, circular: false, …}
+10: {source: {…}, target: {…}, value: 37, index: 10, circular: false, …}
+</code></pre>
+
+</details>
+
+<p>&nbsp;</p>
+<h3 id="external-package-used_1">External Package Used</h3>
+<h5 id="d3">d3</h5>
+<ul>
+<li><a href="https://react-d3-library.github.io/">d3</a></li>
+<li><a href="https://github.com/d3/d3-scale">d3-sacle</a></li>
+<li><a href="https://github.com/d3/d3-shape">d3-shape</a></li>
+<li><a href="https://github.com/tomshanley/d3-sankey-circular">d3-sankey-circular</a></li>
+</ul>
+<h5 id="visx">visx</h5>
+<ul>
+<li><a href="https://airbnb.io/visx/">visx</a>
+<br>
+This package is used to plot the verital and horizontal block (mainly for node blocks)</li>
+</ul>
+<h5 id="react-query">react-query</h5>
+<ul>
+<li><a href="https://tanstack.com/query/v4">react-query</a>
+<br>
+This package is used to fetching, caching, synchronizing and updating server state</li>
+</ul>
+<p>&nbsp;</p>
+<h3 id="functions_1">Functions</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Functionality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Click Edge Lighten</td>
+<td>render Card component on enslaved people nodes</td>
+</tr>
+<tr>
+<td>Hover on Node</td>
+<td>Lighten all edges which are connected with the hover node</td>
+</tr>
+<tr>
+<td>Connect with Map</td>
+<td>Display the data which is related to the chosen edge</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h3 id="directory_1">Directory</h3>
+<pre><code>src
+|
+|___PASTApp
+    |
+    |___Component
+        |___ mapping 
+                |___sankey
+                        |___CircularExample.js
+                        |___CircularSankey.js
+                        |___var.js
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
